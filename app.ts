@@ -1,18 +1,26 @@
 const person: {
   name: string;
   age: number;
+  hobbies: string[];
   address:{
     street: string;
     number: number;
   }
 } = {
-  name: 'ale',
+  name: 'Ale',
   age: 40,
+  hobbies: ['Sports', 'Cooking'],
   address: {
-    street: 'liberty',
+    street: 'Liberty',
     number: 403 
     
   }
 }
 
-console.log(person)
+let favActivities: string[];
+
+console.log(person.name)
+
+for(const hobby of person.hobbies){
+  console.log(hobby.toUpperCase())
+}

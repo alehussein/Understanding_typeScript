@@ -1,9 +1,15 @@
 var person = {
-    name: 'ale',
+    name: 'Ale',
     age: 40,
+    hobbies: ['Sports', 'Cooking'],
     address: {
-        street: 'liberty',
+        street: 'Liberty',
         number: 403
     }
 };
-console.log(person);
+var favActivities;
+console.log(person.name);
+for (var _i = 0, _a = person.hobbies; _i < _a.length; _i++) {
+    var hobby = _a[_i];
+    console.log(hobby.toUpperCase());
+}
