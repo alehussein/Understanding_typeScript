@@ -2,6 +2,7 @@ const person: {
   name: string;
   age: number;
   hobbies: string[];
+  role:[number, string];
   address:{
     street: string;
     number: number;
@@ -10,6 +11,7 @@ const person: {
   name: 'Ale',
   age: 40,
   hobbies: ['Sports', 'Cooking'],
+  role: [2, 'author'],
   address: {
     street: 'Liberty',
     number: 403 

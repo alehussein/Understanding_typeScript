@@ -2,6 +2,7 @@ var person = {
     name: 'Ale',
     age: 40,
     hobbies: ['Sports', 'Cooking'],
+    role: [2, 'author'],
     address: {
         street: 'Liberty',
         number: 403
