@@ -1,37 +1,14 @@
-var person = {
-    name: 'Ale',
-    age: 40,
-    hobbies: ['Sports', 'Cooking'],
-    role: [2, 'author'],
-    address: {
-        street: 'Liberty',
-        number: 403
+function combine(input1, input2) {
+    var result;
+    if (typeof input1 === 'number' && typeof input2 === 'number') {
+        result = input1 + input2;
     }
-};
-var Role;
-(function (Role) {
-    Role[Role["ADMIN"] = 5] = "ADMIN";
-    Role[Role["READ_ONLY"] = 6] = "READ_ONLY";
-    Role[Role["AUTHOR"] = 7] = "AUTHOR";
-})(Role || (Role = {}));
-;
-var anotherPerson = {
-    name: 'Ian',
-    age: 11,
-    hobbies: ['Games', 'Movies'],
-    role: Role.ADMIN,
-    address: {
-        street: 'Liberty',
-        number: 403
+    else {
+        result = input1.toString() + input2.toString();
     }
-};
-var favActivities;
-console.log(person.name);
-console.log(anotherPerson);
-for (var _i = 0, _a = person.hobbies; _i < _a.length; _i++) {
-    var hobby = _a[_i];
-    console.log(hobby.toUpperCase());
+    return result;
 }
-if (anotherPerson.role === Role.ADMIN) {
-    console.log('the role is admin');
-}
+var combinedAges = combine(30, 26);
+console.log(combinedAges);
+var combinedNames = combine('Ian', 'Ale');
+console.log(combinedNames);
