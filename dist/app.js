@@ -43,4 +43,14 @@ var person = {
     age: 40,
 };
 var copiedPerson = __assign({}, person);
-console.log(__assign({}, person));
+var anotherAdd = function () {
+    var numbers = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        numbers[_i] = arguments[_i];
+    }
+    return numbers.reduce(function (curResult, curValue) {
+        return curResult + curValue;
+    }, 0);
+};
+var addedNumbers = anotherAdd(5, 10, 2, 3.7);
+console.log(addedNumbers);
