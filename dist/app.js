@@ -10,6 +10,7 @@ if (age > 20) {
     var isOld = true;
 }
 var adding = function (a, b) {
+    if (b === void 0) { b = 1; }
     return a + b;
 };
 var printOutput = function (output) { return console.log(output); };
@@ -19,4 +20,4 @@ if (button) {
         console.log(event);
     });
 }
-printOutput(add(4, 2));
+printOutput(adding(4));

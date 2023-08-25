@@ -13,7 +13,9 @@ if (age > 20) {
   var isOld: boolean = true;
 }
 
-const adding = (a: number, b: number) => {
+
+
+const adding = (a: number, b: number = 1) => {      //default Parameters
   return a + b;
 };
 
@@ -27,4 +29,4 @@ if (button) {
   });
 }
 
-printOutput(add(4, 2));
+printOutput(adding(4));
