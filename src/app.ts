@@ -17,7 +17,7 @@ const adding = (a: number, b: number) => {
   return a + b;
 };
 
-const printOutput = (output: number | string) => console.log(output);
+const printOutput:(a: number | string) => void = output => console.log(output);
 
 const button = document.querySelector("button");
 
