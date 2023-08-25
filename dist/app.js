@@ -9,5 +9,14 @@ function add(a, b) {
 if (age > 20) {
     var isOld = true;
 }
-console.log(isOld);
-console.log(add(3, 4));
+var adding = function (a, b) {
+    return a + b;
+};
+var printOutput = function (output) { return console.log(output); };
+var button = document.querySelector("button");
+if (button) {
+    button.addEventListener("click", function (event) {
+        console.log(event);
+    });
+}
+printOutput(add(4, 2));
