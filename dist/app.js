@@ -10,14 +10,14 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 var userName = "Max";
-var age = 30;
-age = 29;
+var ages = 30;
+ages = 29;
 var result;
 function add(a, b) {
     result = a + b;
     return result;
 }
-if (age > 20) {
+if (ages > 20) {
     var isOld = true;
 }
 var adding = function (a, b) {
@@ -39,7 +39,7 @@ var hobbies = ["sports", "cooking"];
 var activeHobbies = ["hiking"];
 activeHobbies.push.apply(activeHobbies, hobbies);
 var person = {
-    name: "ale",
+    names: "ale",
     age: 40,
 };
 var copiedPerson = __assign({}, person);
@@ -54,3 +54,5 @@ var anotherAdd = function () {
 };
 var addedNumbers = anotherAdd(5, 10, 2, 3.7);
 console.log(addedNumbers);
+var hobby1 = hobbies[0], hobby2 = hobbies[1];
+var names = person.names, age = person.age;

@@ -1,7 +1,7 @@
 const userName: string = "Max";
-let age: number = 30;
+let ages: number = 30;
 
-age = 29;
+ages = 29;
 let result: number;
 
 function add(a: number, b: number) {
@@ -9,7 +9,7 @@ function add(a: number, b: number) {
   return result;
 }
 
-if (age > 20) {
+if (ages > 20) {
   var isOld: boolean = true;
 }
 
@@ -37,7 +37,7 @@ const activeHobbies = ["hiking"];
 activeHobbies.push(...hobbies);
 
 const person = {
-  name: "ale",
+  names: "ale",
   age: 40,
 };
 
@@ -51,3 +51,6 @@ const anotherAdd = (...numbers: number[]) => {
 
 const addedNumbers = anotherAdd(5, 10, 2, 3.7);
 console.log(addedNumbers);
+
+const [hobby1, hobby2] = hobbies;
+const { names, age } = person;
