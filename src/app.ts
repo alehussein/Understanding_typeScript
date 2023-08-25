@@ -13,13 +13,13 @@ if (age > 20) {
   var isOld: boolean = true;
 }
 
-
-
-const adding = (a: number, b: number = 1) => {      //default Parameters
+const adding = (a: number, b: number = 1) => {
+  //default Parameters
   return a + b;
 };
 
-const printOutput:(a: number | string) => void = output => console.log(output);
+const printOutput: (a: number | string) => void = (output) =>
+  console.log(output);
 
 const button = document.querySelector("button");
 
@@ -30,3 +30,16 @@ if (button) {
 }
 
 printOutput(adding(4));
+
+const hobbies = ["sports", "cooking"];
+const activeHobbies = ["hiking"];
+
+activeHobbies.push(...hobbies);
+
+const person = {
+  name: "ale",
+  age: 40,
+};
+
+const copiedPerson = { ...person };
+console.log({...person})
