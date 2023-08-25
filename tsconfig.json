@@ -117,10 +117,10 @@
     "src/objs-arrays-enum.ts",
     "union-aliases.ts",
     "unknown-type.ts",
-    "node_modules"
+    "node_modules",
+    "src/analytics.ts"
   ],
   "include": [
-    "app.ts",
-    "src/analytics.ts"
+    "src/app.ts",
   ]
 }

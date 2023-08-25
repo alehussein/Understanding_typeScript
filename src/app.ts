@@ -1,15 +1,17 @@
-const button = document.querySelector("button");
+const userName: string = "Max";
+let age: number = 30;
 
-function clickHandler(message: string) {
-  console.log("Clicked" + message);
+age = 29;
+let result: number;
+
+function add(a: number, b: number) {
+  result = a + b;
+  return result;
 }
 
-function adding(n1: number, n2: number) {
-  if (n1 + n2 > 0) {
-    return n1 + n2;
-  }
+if (age > 20) {
+  var isOld: boolean = true;
 }
 
-if (button) {
-  button.addEventListener("click", clickHandler.bind(null, "You are welcome"));
-}
+console.log(isOld);
+console.log(add(3, 4));
