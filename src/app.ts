@@ -1,9 +1,11 @@
 class Department {
-  // private id: string;
+  // private readonly id: string;    // what the word say X)
   // public name: string;               // public property can access outside the class
   private employees: string[]= [];  // private property only access inside the class
+  
 
-  constructor(public name: string, private id: string) {
+
+  constructor(public  name: string, private readonly id: string) {
     // this.id = id;
     // this.name = n;
   }
@@ -22,8 +24,43 @@ class Department {
   }
 }
 
+class ItDepartment extends Department {
+  admins: string[]
+constructor(id: string, admins: string[]) {
+  super(id, 'IT');
+  this.admins = admins;
+}
+}
 
-const accounting = new Department("Accounting", 'm1');
+class AccountingDpt extends Department {
+  accounts: string[]
+  constructor(id: string, private account: string[]){
+    super(id, 'Account');
+    this.accounts = account
+  }
+  addReports(text:string){
+    this.account.push(text);
+  }
+
+  getAccounts(){
+    console.log('Accounts: ' + this.accounts);
+  }
+}
+
+const accounting = new ItDepartment('m1', ['Ale']);
+const it = new ItDepartment('m1', ['Ale']);
+const account = new AccountingDpt('m1', []);
+
+account.addReports('petrol');
+account.addReports('oils');
+account.getAccounts();
+
+it.addEmployees('Ale');
+it.addEmployees('Ian');
+it.describe();
+it.printEmployeeInfo();
+
+console.log(it);
 
 accounting.addEmployees('Ale');
 accounting.addEmployees('Ian');
