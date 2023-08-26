@@ -1,7 +1,7 @@
 class Department {
   // private readonly id: string;    // what the word say X)
   // public name: string;               // public property can access outside the class
-  private employees: string[]= [];  // private property only access inside the class
+  protected employees: string[]= [];  // private property only access inside the class
   
 
 
@@ -38,6 +38,14 @@ class AccountingDpt extends Department {
     super(id, 'Account');
     this.accounts = account
   }
+
+  addEmployee(name: string){
+      if( name === 'Ale'){
+        return; 
+      }
+      this.employees.push(name)
+  }
+
   addReports(text:string){
     this.account.push(text);
   }
@@ -53,7 +61,9 @@ const account = new AccountingDpt('m1', []);
 
 account.addReports('petrol');
 account.addReports('oils');
+account.addEmployee('Monte')
 account.getAccounts();
+account.printEmployeeInfo();
 
 it.addEmployees('Ale');
 it.addEmployees('Ian');

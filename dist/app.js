@@ -53,6 +53,12 @@ var AccountingDpt = /** @class */ (function (_super) {
         _this.accounts = account;
         return _this;
     }
+    AccountingDpt.prototype.addEmployee = function (name) {
+        if (name === 'Ale') {
+            return;
+        }
+        this.employees.push(name);
+    };
     AccountingDpt.prototype.addReports = function (text) {
         this.account.push(text);
     };
@@ -66,7 +72,9 @@ var it = new ItDepartment('m1', ['Ale']);
 var account = new AccountingDpt('m1', []);
 account.addReports('petrol');
 account.addReports('oils');
+account.addEmployee('Monte');
 account.getAccounts();
+account.printEmployeeInfo();
 it.addEmployees('Ale');
 it.addEmployees('Ian');
 it.describe();
