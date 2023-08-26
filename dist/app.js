@@ -17,7 +17,7 @@ var Department = /** @class */ (function () {
     function Department(name, id) {
         this.name = name;
         this.id = id;
-        // private readonly id: string;    // what the word say X)
+        // private readonly id: string;       //  readonly what the word say X)
         // public name: string;               // public property can access outside the class
         this.employees = []; // private property only access inside the class
         // this.id = id;
@@ -25,7 +25,7 @@ var Department = /** @class */ (function () {
     }
     Department.prototype.describe = function () {
         console.log("Department: " + this.name);
-        console.log('Id: ' + this.id);
+        console.log("Id: " + this.id);
     };
     Department.prototype.addEmployees = function (employee) {
         this.employees.push(employee);
@@ -39,7 +39,7 @@ var Department = /** @class */ (function () {
 var ItDepartment = /** @class */ (function (_super) {
     __extends(ItDepartment, _super);
     function ItDepartment(id, admins) {
-        var _this = _super.call(this, id, 'IT') || this;
+        var _this = _super.call(this, id, "IT") || this;
         _this.admins = admins;
         return _this;
     }
@@ -48,40 +48,60 @@ var ItDepartment = /** @class */ (function (_super) {
 var AccountingDpt = /** @class */ (function (_super) {
     __extends(AccountingDpt, _super);
     function AccountingDpt(id, account) {
-        var _this = _super.call(this, id, 'Account') || this;
+        var _this = _super.call(this, id, "Account") || this;
         _this.account = account;
         _this.accounts = account;
+        _this.lastAccount = account[0];
         return _this;
     }
+    Object.defineProperty(AccountingDpt.prototype, "mostRecentAccount", {
+        get: function () {
+            if (this.lastAccount) {
+                return this.lastAccount;
+            }
+            throw new Error("No Account Found.");
+        },
+        set: function (value) {
+            if (!value) {
+                throw new Error('Please pass in a valid value!');
+            }
+            this.addReports(value);
+        },
+        enumerable: false,
+        configurable: true
+    });
     AccountingDpt.prototype.addEmployee = function (name) {
-        if (name === 'Ale') {
+        if (name === "Ale") {
             return;
         }
         this.employees.push(name);
     };
     AccountingDpt.prototype.addReports = function (text) {
         this.account.push(text);
+        this.lastAccount = text;
     };
     AccountingDpt.prototype.getAccounts = function () {
-        console.log('Accounts: ' + this.accounts);
+        console.log(this.accounts);
     };
     return AccountingDpt;
 }(Department));
-var accounting = new ItDepartment('m1', ['Ale']);
-var it = new ItDepartment('m1', ['Ale']);
-var account = new AccountingDpt('m1', []);
-account.addReports('petrol');
-account.addReports('oils');
-account.addEmployee('Monte');
+var accounting = new ItDepartment("m1", ["Ale"]);
+var it = new ItDepartment("m1", ["Ale"]);
+var account = new AccountingDpt("m1", []);
+account.mostRecentAccount = 'Year end Account';
+account.addReports("petrol");
+console.log(account.mostRecentAccount);
+account.addReports("oils");
+account.addEmployee("Monte");
 account.getAccounts();
 account.printEmployeeInfo();
-it.addEmployees('Ale');
-it.addEmployees('Ian');
+it.addEmployees("Ale");
+it.addEmployees("Ian");
 it.describe();
 it.printEmployeeInfo();
 console.log(it);
-accounting.addEmployees('Ale');
-accounting.addEmployees('Ian');
+accounting.addEmployees("Ale");
+accounting.addEmployees("Ian");
 accounting.describe();
 accounting.printEmployeeInfo();
 // const accountingCopy = { name: "DUMMY", describe: accounting.describe };
