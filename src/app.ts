@@ -1,13 +1,16 @@
 class Department {
-  public name: string;               // public property can access outside the class
+  // private id: string;
+  // public name: string;               // public property can access outside the class
   private employees: string[]= [];  // private property only access inside the class
 
-  constructor(n: string) {
-    this.name = n;
+  constructor(public name: string, private id: string) {
+    // this.id = id;
+    // this.name = n;
   }
 
   describe(this: Department) {
     console.log("Department: " + this.name);
+    console.log('Id: ' + this.id);
   }
   addEmployees(employee: string){
     this.employees.push(employee)
@@ -20,7 +23,7 @@ class Department {
 }
 
 
-const accounting = new Department("Accounting");
+const accounting = new Department("Accounting", 'm1');
 
 accounting.addEmployees('Ale');
 accounting.addEmployees('Ian');
