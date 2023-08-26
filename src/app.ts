@@ -1,10 +1,10 @@
-class Department {
+abstract class Department {
   static fiscalYear = 2020;
   // private readonly id: string;       //  readonly what the word say X)
   // public name: string;               // public property can access outside the class
   protected employees: string[] = []; // private property only access inside the class
 
-  constructor(public name: string, private readonly id: string) {
+  constructor(public name: string, protected readonly id: string) {
     // this.id = id;
     // this.name = n;
   }
@@ -13,10 +13,9 @@ class Department {
     return { name: name };
   }
 
-  describe(this: Department) {
-    console.log("Department: " + this.name);
-    console.log("Id: " + this.id);
-  }
+  abstract describe(this: Department) : void 
+
+
   addEmployees(employee: string) {
     this.employees.push(employee);
   }
@@ -30,8 +29,11 @@ class Department {
 class ItDepartment extends Department {
   admins: string[];
   constructor(id: string, admins: string[]) {
-    super(id, "IT");
+    super( "IT", id);
     this.admins = admins;
+  }
+  describe() {
+      console.log('IT Department - ID: ' + this.id)
   }
 }
 
@@ -54,9 +56,13 @@ class AccountingDpt extends Department {
   }
 
   constructor(id: string, private account: string[]) {
-    super(id, "Account");
+    super("Account", id);
     this.accounts = account;
     this.lastAccount = account[0];
+  }
+
+  describe(){
+      console.log('Accounting Department - ID: ' + this.id)
   }
 
   addEmployee(name: string) {
@@ -82,6 +88,8 @@ console.log(employee1, Department.fiscalYear);
 const accounting = new ItDepartment("m1", ["Ale"]);
 const it = new ItDepartment("m1", ["Ale"]);
 const account = new AccountingDpt("m1", []);
+
+account.describe();
 
 account.mostRecentAccount = "Year end Account";
 account.addReports("petrol");

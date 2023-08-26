@@ -26,10 +26,6 @@ var Department = /** @class */ (function () {
     Department.createEmployee = function (name) {
         return { name: name };
     };
-    Department.prototype.describe = function () {
-        console.log("Department: " + this.name);
-        console.log("Id: " + this.id);
-    };
     Department.prototype.addEmployees = function (employee) {
         this.employees.push(employee);
     };
@@ -43,16 +39,19 @@ var Department = /** @class */ (function () {
 var ItDepartment = /** @class */ (function (_super) {
     __extends(ItDepartment, _super);
     function ItDepartment(id, admins) {
-        var _this = _super.call(this, id, "IT") || this;
+        var _this = _super.call(this, "IT", id) || this;
         _this.admins = admins;
         return _this;
     }
+    ItDepartment.prototype.describe = function () {
+        console.log('IT Department - ID: ' + this.id);
+    };
     return ItDepartment;
 }(Department));
 var AccountingDpt = /** @class */ (function (_super) {
     __extends(AccountingDpt, _super);
     function AccountingDpt(id, account) {
-        var _this = _super.call(this, id, "Account") || this;
+        var _this = _super.call(this, "Account", id) || this;
         _this.account = account;
         _this.accounts = account;
         _this.lastAccount = account[0];
@@ -74,6 +73,9 @@ var AccountingDpt = /** @class */ (function (_super) {
         enumerable: false,
         configurable: true
     });
+    AccountingDpt.prototype.describe = function () {
+        console.log('Accounting Department - ID: ' + this.id);
+    };
     AccountingDpt.prototype.addEmployee = function (name) {
         if (name === "Ale") {
             return;
@@ -94,6 +96,7 @@ console.log(employee1, Department.fiscalYear);
 var accounting = new ItDepartment("m1", ["Ale"]);
 var it = new ItDepartment("m1", ["Ale"]);
 var account = new AccountingDpt("m1", []);
+account.describe();
 account.mostRecentAccount = "Year end Account";
 account.addReports("petrol");
 console.log(account.mostRecentAccount);
