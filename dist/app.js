@@ -23,6 +23,9 @@ var Department = /** @class */ (function () {
         // this.id = id;
         // this.name = n;
     }
+    Department.createEmployee = function (name) {
+        return { name: name };
+    };
     Department.prototype.describe = function () {
         console.log("Department: " + this.name);
         console.log("Id: " + this.id);
@@ -34,6 +37,7 @@ var Department = /** @class */ (function () {
         console.log(this.employees.length);
         console.log(this.employees);
     };
+    Department.fiscalYear = 2020;
     return Department;
 }());
 var ItDepartment = /** @class */ (function (_super) {
@@ -63,7 +67,7 @@ var AccountingDpt = /** @class */ (function (_super) {
         },
         set: function (value) {
             if (!value) {
-                throw new Error('Please pass in a valid value!');
+                throw new Error("Please pass in a valid value!");
             }
             this.addReports(value);
         },
@@ -85,10 +89,12 @@ var AccountingDpt = /** @class */ (function (_super) {
     };
     return AccountingDpt;
 }(Department));
+var employee1 = Department.createEmployee("Cary");
+console.log(employee1, Department.fiscalYear);
 var accounting = new ItDepartment("m1", ["Ale"]);
 var it = new ItDepartment("m1", ["Ale"]);
 var account = new AccountingDpt("m1", []);
-account.mostRecentAccount = 'Year end Account';
+account.mostRecentAccount = "Year end Account";
 account.addReports("petrol");
 console.log(account.mostRecentAccount);
 account.addReports("oils");

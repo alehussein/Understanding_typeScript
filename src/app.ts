@@ -1,4 +1,5 @@
 class Department {
+  static fiscalYear = 2020;
   // private readonly id: string;       //  readonly what the word say X)
   // public name: string;               // public property can access outside the class
   protected employees: string[] = []; // private property only access inside the class
@@ -6,6 +7,10 @@ class Department {
   constructor(public name: string, private readonly id: string) {
     // this.id = id;
     // this.name = n;
+  }
+
+  static createEmployee(name: string) {
+    return { name: name };
   }
 
   describe(this: Department) {
@@ -41,11 +46,11 @@ class AccountingDpt extends Department {
     throw new Error("No Account Found.");
   }
 
-  set mostRecentAccount(value: string){
-    if(!value){
-      throw new Error('Please pass in a valid value!')
+  set mostRecentAccount(value: string) {
+    if (!value) {
+      throw new Error("Please pass in a valid value!");
     }
-    this.addReports(value)
+    this.addReports(value);
   }
 
   constructor(id: string, private account: string[]) {
@@ -71,12 +76,14 @@ class AccountingDpt extends Department {
   }
 }
 
+const employee1 = Department.createEmployee("Cary");
+console.log(employee1, Department.fiscalYear);
+
 const accounting = new ItDepartment("m1", ["Ale"]);
 const it = new ItDepartment("m1", ["Ale"]);
 const account = new AccountingDpt("m1", []);
 
-
-account.mostRecentAccount = 'Year end Account';
+account.mostRecentAccount = "Year end Account";
 account.addReports("petrol");
 console.log(account.mostRecentAccount);
 
