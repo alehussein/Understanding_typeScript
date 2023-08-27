@@ -73,6 +73,13 @@ var AccountingDpt = /** @class */ (function (_super) {
         enumerable: false,
         configurable: true
     });
+    AccountingDpt.getInstance = function () {
+        if (AccountingDpt.instance) {
+            return this.instance;
+        }
+        this.instance = new AccountingDpt('m1', []);
+        return this.instance;
+    };
     AccountingDpt.prototype.describe = function () {
         console.log('Accounting Department - ID: ' + this.id);
     };
@@ -95,7 +102,8 @@ var employee1 = Department.createEmployee("Cary");
 console.log(employee1, Department.fiscalYear);
 var accounting = new ItDepartment("m1", ["Ale"]);
 var it = new ItDepartment("m1", ["Ale"]);
-var account = new AccountingDpt("m1", []);
+// const account = new AccountingDpt("m1", []);
+var account = AccountingDpt.getInstance();
 account.describe();
 account.mostRecentAccount = "Year end Account";
 account.addReports("petrol");
