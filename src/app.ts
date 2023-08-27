@@ -1,129 +1,32 @@
-abstract class Department {
-  static fiscalYear = 2020;
-  // private readonly id: string;       //  readonly what the word say X)
-  // public name: string;               // public property can access outside the class
-  protected employees: string[] = []; // private property only access inside the class
+interface Greetable {
+  name: string;
 
-  constructor(public name: string, protected readonly id: string) {
-    // this.id = id;
-    // this.name = n;
+  greet(phrase: string): void;
+}
+
+class Person implements Greetable {
+  name: string;
+  age = 41;
+
+  constructor(n: string) {
+    this.name = n;
   }
 
-  static createEmployee(name: string) {
-    return { name: name };
-  }
-
-  abstract describe(this: Department) : void 
-
-
-  addEmployees(employee: string) {
-    this.employees.push(employee);
-  }
-
-  printEmployeeInfo() {
-    console.log(this.employees.length);
-    console.log(this.employees);
+  greet(phrase: string): void {
+    console.log(phrase + " " + this.name);
   }
 }
 
-class ItDepartment extends Department {
-  admins: string[];
-  constructor(id: string, admins: string[]) {
-    super( "IT", id);
-    this.admins = admins;
-  }
-  describe() {
-      console.log('IT Department - ID: ' + this.id)
-  }
-}
+let user1: Person;
 
-class AccountingDpt extends Department {
-  private lastAccount: string;
-  private static instance: AccountingDpt;
-  accounts: string[];
+// user1 = {
+//   name: "Ale",
+//   age: 41,
+//   greet(phrase: string) {
+//     console.log(phrase + " " + this.name);
+//   },
+// };
 
-  get mostRecentAccount() {
-    if (this.lastAccount) {
-      return this.lastAccount;
-    }
-    throw new Error("No Account Found.");
-  }
+user1 = new Person('Ale')
 
-  set mostRecentAccount(value: string) {
-    if (!value) {
-      throw new Error("Please pass in a valid value!");
-    }
-    this.addReports(value);
-  }
-
-  private constructor(id: string, private account: string[]) {
-    super("Account", id);
-    this.accounts = account;
-    this.lastAccount = account[0];
-  }
-
-  static getInstance(){
-    if(AccountingDpt.instance){
-      return this.instance;
-    }
-    this.instance = new AccountingDpt('m1', []);
-    return this.instance
-  }
-
-  describe(){
-      console.log('Accounting Department - ID: ' + this.id)
-  }
-
-  addEmployee(name: string) {
-    if (name === "Ale") {
-      return;
-    }
-    this.employees.push(name);
-  }
-
-  addReports(text: string) {
-    this.account.push(text);
-    this.lastAccount = text;
-  }
-
-  getAccounts() {
-    console.log(this.accounts);
-  }
-}
-
-const employee1 = Department.createEmployee("Cary");
-console.log(employee1, Department.fiscalYear);
-
-const accounting = new ItDepartment("m1", ["Ale"]);
-const it = new ItDepartment("m1", ["Ale"]);
-// const account = new AccountingDpt("m1", []);
-
-const account = AccountingDpt.getInstance();
-
-account.describe();
-
-account.mostRecentAccount = "Year end Account";
-account.addReports("petrol");
-console.log(account.mostRecentAccount);
-
-account.addReports("oils");
-account.addEmployee("Monte");
-account.getAccounts();
-account.printEmployeeInfo();
-
-it.addEmployees("Ale");
-it.addEmployees("Ian");
-it.describe();
-it.printEmployeeInfo();
-
-console.log(it);
-
-accounting.addEmployees("Ale");
-accounting.addEmployees("Ian");
-
-accounting.describe();
-accounting.printEmployeeInfo();
-
-// const accountingCopy = { name: "DUMMY", describe: accounting.describe };
-
-// accountingCopy.describe();
+user1.greet("Hi there - I am");
