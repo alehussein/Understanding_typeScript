@@ -61,8 +61,11 @@ function moveAnimal(animal) {
 }
 moveAnimal({ type: "bird", flyingSpeed: 10 });
 // const userInputElement = <HTMLInputElement>document.getElementById('user-input')!;
-var userInputElement = document.getElementById('user-input'); ///! as HTMLInputElement;
+var userInputElement = document.getElementById("user-input"); ///! as HTMLInputElement;
 if (userInputElement) {
-    userInputElement.value = 'Hi There!';
+    userInputElement.value = "Hi There!";
 }
-// userInputElement.value = 'Hi There!';
+var errorBag = {
+    email: 'Not a valid Email!',
+    userName: 'Must start with a capital character!'
+};
