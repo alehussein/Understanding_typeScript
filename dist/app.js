@@ -60,3 +60,9 @@ function moveAnimal(animal) {
     console.log("Animal Whit Speed: " + speed);
 }
 moveAnimal({ type: "bird", flyingSpeed: 10 });
+// const userInputElement = <HTMLInputElement>document.getElementById('user-input')!;
+var userInputElement = document.getElementById('user-input'); ///! as HTMLInputElement;
+if (userInputElement) {
+    userInputElement.value = 'Hi There!';
+}
+// userInputElement.value = 'Hi There!';
