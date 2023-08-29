@@ -1,3 +1,4 @@
+var _a;
 var e1 = {
     name: "Ale",
     privileges: ["create-server"],
@@ -66,8 +67,8 @@ if (userInputElement) {
     userInputElement.value = "Hi There!";
 }
 var errorBag = {
-    email: 'Not a valid Email!',
-    userName: 'Must start with a capital character!'
+    email: "Not a valid Email!",
+    userName: "Must start with a capital character!",
 };
 function addOne(a, b) {
     if (typeof a === "string" || typeof b === "string") {
@@ -75,5 +76,14 @@ function addOne(a, b) {
     }
     return a + b;
 }
-var result = addOne('Monte', 'Ale');
-result.split(' ');
+var result = addOne("Monte", "Ale");
+result.split(" ");
+var fetchUserData = {
+    id: "m1",
+    name: "ale",
+    job: { title: "CEO", description: "My own Company" },
+};
+console.log((_a = fetchUserData === null || fetchUserData === void 0 ? void 0 : fetchUserData.job) === null || _a === void 0 ? void 0 : _a.title);
+var userInput = undefined;
+var storedData = userInput !== null && userInput !== void 0 ? userInput : "DEFAULT";
+console.log(storedData);

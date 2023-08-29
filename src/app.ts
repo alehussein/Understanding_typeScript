@@ -28,7 +28,6 @@ function add(n1: Combinable, n2: Combinable) {
   return n1.toString() + n2.toString();
 }
 
-
 type UnknownEmployee = Employee | Admin;
 
 function printEmployeeInfo(emp: UnknownEmployee) {
@@ -107,20 +106,20 @@ if (userInputElement) {
 }
 // userInputElement.value = 'Hi There!';
 
-interface ErrorContainer {    ///{ email: 'not a valid email', ' username: 'Must start with a character! '}
-  [prop: string] : string;
+interface ErrorContainer {
+  ///{ email: 'not a valid email', ' username: 'Must start with a character! '}
+  [prop: string]: string;
 }
 
 const errorBag: ErrorContainer = {
-  email: 'Not a valid Email!',
-  userName: 'Must start with a capital character!'
+  email: "Not a valid Email!",
+  userName: "Must start with a capital character!",
 };
 
-
-function addOne(a:number, b:number): number;
-function addOne(a:string, b:string): string;
-function addOne(a:number, b:string): string;
-function addOne(a:string, b:number): string;
+function addOne(a: number, b: number): number;
+function addOne(a: string, b: string): string;
+function addOne(a: number, b: string): string;
+function addOne(a: string, b: number): string;
 
 function addOne(a: Combinable, b: Combinable) {
   if (typeof a === "string" || typeof b === "string") {
@@ -129,5 +128,18 @@ function addOne(a: Combinable, b: Combinable) {
   return a + b;
 }
 
-const result = addOne('Monte', 'Ale')
-result.split(' ');
+const result = addOne("Monte", "Ale");
+result.split(" ");
+
+const fetchUserData = {
+  id: "m1",
+  name: "ale",
+  job: { title: "CEO", description: "My own Company" },
+};
+
+console.log(fetchUserData?.job?.title);
+
+const userInput = undefined;
+
+const storedData = userInput ?? "DEFAULT";
+console.log(storedData);
