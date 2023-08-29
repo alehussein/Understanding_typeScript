@@ -69,3 +69,11 @@ var errorBag = {
     email: 'Not a valid Email!',
     userName: 'Must start with a capital character!'
 };
+function addOne(a, b) {
+    if (typeof a === "string" || typeof b === "string") {
+        return a.toString() + b.toString();
+    }
+    return a + b;
+}
+var result = addOne('Monte', 'Ale');
+result.split(' ');

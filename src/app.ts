@@ -28,6 +28,7 @@ function add(n1: Combinable, n2: Combinable) {
   return n1.toString() + n2.toString();
 }
 
+
 type UnknownEmployee = Employee | Admin;
 
 function printEmployeeInfo(emp: UnknownEmployee) {
@@ -113,5 +114,20 @@ interface ErrorContainer {    ///{ email: 'not a valid email', ' username: 'Must
 const errorBag: ErrorContainer = {
   email: 'Not a valid Email!',
   userName: 'Must start with a capital character!'
+};
+
+
+function addOne(a:number, b:number): number;
+function addOne(a:string, b:string): string;
+function addOne(a:number, b:string): string;
+function addOne(a:string, b:number): string;
+
+function addOne(a: Combinable, b: Combinable) {
+  if (typeof a === "string" || typeof b === "string") {
+    return a.toString() + b.toString();
+  }
+  return a + b;
 }
 
+const result = addOne('Monte', 'Ale')
+result.split(' ');
