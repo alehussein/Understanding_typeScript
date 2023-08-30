@@ -1,119 +1,97 @@
-//Generics
+// Decorators
 
-const names: Array<string> = [];
-// names[0].split(' ');
-const promise: Promise<string> = new Promise((resolve, reject) => {
-  setTimeout(() => {
-    resolve("this is done!");
-  }, 2000);
-});
+//A First Class Decorator
 
-promise.then((data) => {
-  data.split(" ");
-});
-
-//Own generics Function
-
-function merge<T, U>(objA: T, objB: U) {
-  return Object.assign({ objA }, objB);
+function Logger(logString: string) {
+  console.log("LOGGER FACTORY");
+  return function (constructor: Function) {
+    console.log(logString);
+    console.log(constructor);
+  };
 }
 
-const mergeObject = merge({ name: "Ale", hobbies: ["sports"] }, { age: 41 });
-console.log(mergeObject);
-
-// Constrains
-
-function anotherMerge<T extends object, U extends object>(objA: T, objB: U) {
-  return Object.assign(objA, objB);
-}
-
-const anotherMergeObject = merge(
-  { name: "Ian", hobbies: ["games"] },
-  { age: 11 }
-);
-console.log(anotherMergeObject);
-
-interface Lengthy {
-  length: number;
-}
-
-function countAndPrint<T extends Lengthy>(element: T): [T, string] {
-  let descriptionText = "Go no value";
-  if (element.length === 0) {
-    descriptionText = "Got 1 elements.";
-  } else if (element.length > 1) {
-    descriptionText = "Got " + element.length + " elements.";
-  }
-  return [element, descriptionText];
-}
-console.log(countAndPrint(["cooking", "sport"]));
-
-// keyof constrains
-
-function extractAndConvert<T extends object, U extends keyof T>(
-  obj: T,
-  key: U
-) {
-  return "value: " + obj[key];
-}
-
-console.log(extractAndConvert({ name: "ALE" }, "name"));
-
-// Generic Classes
-
-class DataStorage<T extends string | number | boolean> {
-  private data: T[] = [];
-
-  addItem(item: T) {
-    this.data.push(item);
-  }
-
-  removeItem(item: T) {
-    if (this.data.indexOf(item) === -1) {
-      return;
+function WithTemplate(template: string, hookId: string) {
+  console.log("TEMPLATE FACTORY");
+  return function (constructor: any) {
+    console.log("Rendering template");
+    const hookEl = document.getElementById(hookId);
+    const p = new constructor();
+    if (hookEl) {
+      hookEl.innerHTML = template;
+      hookEl.querySelector("h1")!.textContent = p.name;
     }
-    this.data.splice(this.data.indexOf(item), 1);
-  }
-
-  getItem() {
-    return [...this.data];
-  }
+  };
 }
 
-const textStorage = new DataStorage<string>();
-textStorage.addItem("Ale");
-textStorage.addItem("Ian");
-textStorage.addItem("Monte");
-console.log(textStorage.getItem());
+@Logger("LOGGING")
+@WithTemplate("<h1>My Personal Object</h1>", "app")
+class Person {
+  name = "Ale";
 
-const numberStorage = new DataStorage<number>();
-numberStorage.addItem(41);
-numberStorage.addItem(11);
-numberStorage.addItem(76);
-console.log(numberStorage.getItem());
+  constructor() {
+    console.log("Creating person object...");
+  }
+}
+const pers = new Person();
 
-/// utility types
+console.log(pers);
 
-interface CourseGoal {
+///---
+
+function Log(target: any, propertyName: string | symbol) {
+  console.log("Property decorator!");
+  console.log(target, propertyName);
+}
+
+function Log2(target: any, name: string, descriptor: PropertyDescriptor) {
+  console.log("Accessor decorator");
+  console.log(target);
+  console.log(name);
+  console.log(descriptor);
+}
+
+function Log3(
+  target: any,
+  name: string | symbol,
+  descriptor: PropertyDescriptor
+) {
+  console.log("Method Decorator");
+  console.log(target);
+  console.log(name);
+  console.log(descriptor);
+}
+
+function Log4(target: any, name: string | symbol, position: number) {
+  console.log("Parameter Decorator");
+  console.log(target);
+  console.log(name);
+  console.log(position);
+}
+
+class Products {
+  @Log
   title: string;
-  description: string;
-  completeUnit: Date;
+  private _price: number;
+
+  @Log2
+  set price(val: number) {
+    if (val > 0) {
+      this._price = val;
+    } else {
+      throw new Error("Invalid Price - should be positive");
+    }
+  }
+
+  constructor(t: string, p: number) {
+    this.title = t;
+    this._price = p;
+  }
+
+  @Log3
+  getPriceWithTax(@Log4 tax: number) {
+    return this._price * (1 + tax);
+  }
 }
 
-function createCourseGoal(
-  title: string,
-  description: string,
-  date: Date
-): CourseGoal {
-  let courseGoal: Partial<CourseGoal> = {};
-  courseGoal.title = title;
-  courseGoal.description = description;
-  courseGoal.completeUnit = date;
-  return courseGoal as CourseGoal;
-  // return { title: title, description: description, completeUnit: date };
-}
-
-const anotherNames: Readonly<string[]> = ["Max", "Sports"];
-// anotherNames.push("Manu");
-// anotherNames.pop()
-
+const p1 = new Products("BOOK", 54);
+const p2 = new Products("Book", 32);
