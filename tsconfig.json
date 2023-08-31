@@ -112,13 +112,6 @@
     "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
   },
   "exclude": [
-    "basics.ts",
-    "functions.ts",
-    "src/objs-arrays-enum.ts",
-    "union-aliases.ts",
-    "unknown-type.ts",
-    "node_modules",
-    "src/analytics.ts"
   ],
   "include": [
     "src/app.ts",
