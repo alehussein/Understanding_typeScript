@@ -92,6 +92,16 @@ var ProjectState = /** @class */ (function (_super) {
     ProjectState.prototype.addProject = function (title, description, numberOfPeople) {
         var newProject = new Project(Math.random().toString(), title, description, numberOfPeople, ProjectStatus.Active);
         this.projects.push(newProject);
+        this.updateListeners();
+    };
+    ProjectState.prototype.moveProject = function (projectId, newStatus) {
+        var project = this.projects.find(function (prj) { return prj.id === projectId; });
+        if (project && project.status !== newStatus) {
+            project.status = newStatus;
+            this.updateListeners();
+        }
+    };
+    ProjectState.prototype.updateListeners = function () {
         for (var _i = 0, _a = this.listeners; _i < _a.length; _i++) {
             var listenerFn = _a[_i];
             listenerFn(this.projects.slice());
@@ -121,7 +131,7 @@ var Component = /** @class */ (function () {
 var ProjectItem = /** @class */ (function (_super) {
     __extends(ProjectItem, _super);
     function ProjectItem(hostId, project) {
-        var _this = _super.call(this, 'single-project', hostId, false, project.id) || this;
+        var _this = _super.call(this, "single-project", hostId, false, project.id) || this;
         _this.project = project;
         _this.configure();
         _this.renderContent();
@@ -130,7 +140,7 @@ var ProjectItem = /** @class */ (function (_super) {
     Object.defineProperty(ProjectItem.prototype, "persons", {
         get: function () {
             if (this.project.people === 1) {
-                return '1 person';
+                return "1 person";
             }
             else {
                 return "".concat(this.project.people, " persons");
@@ -139,12 +149,21 @@ var ProjectItem = /** @class */ (function (_super) {
         enumerable: false,
         configurable: true
     });
-    ProjectItem.prototype.configure = function () { };
-    ;
+    ProjectItem.prototype.dragStartHandler = function (event) {
+        event.dataTransfer.setData("text/plain", this.project.id);
+        event.dataTransfer.effectAllowed = "move";
+    };
+    ProjectItem.prototype.dragEndHandler = function (event) {
+        console.log("DragEnd");
+    };
+    ProjectItem.prototype.configure = function () {
+        this.element.addEventListener("dragstart", this.dragStartHandler.bind(this));
+        this.element.addEventListener("dragend", this.dragEndHandler.bind(this));
+    };
     ProjectItem.prototype.renderContent = function () {
-        this.element.querySelector('h2').textContent = this.project.title;
-        this.element.querySelector('h3').textContent = this.persons + ' Assigned';
-        this.element.querySelector('p').textContent = this.project.description;
+        this.element.querySelector("h2").textContent = this.project.title;
+        this.element.querySelector("h3").textContent = this.persons + " Assigned";
+        this.element.querySelector("p").textContent = this.project.description;
     };
     return ProjectItem;
 }(Component));
@@ -155,12 +174,33 @@ var ProjectList = /** @class */ (function (_super) {
         var _this = _super.call(this, "project-list", "app", false, "".concat(type, "-projects")) || this;
         _this.type = type;
         _this.assignedProjects = [];
+        _this.dragOverHandler = _this.dragOverHandler.bind(_this);
+        _this.dragleaveHandler = _this.dragleaveHandler.bind(_this);
+        _this.dropHandler = _this.dropHandler.bind(_this);
         _this.configure();
         _this.renderContent();
         return _this;
     }
+    ProjectList.prototype.dragOverHandler = function (event) {
+        if (event.dataTransfer && event.dataTransfer.types[0] === "text/plain") {
+            event.preventDefault();
+            var listElement = this.element.querySelector("ul");
+            listElement.classList.add("droppable");
+        }
+    };
+    ProjectList.prototype.dropHandler = function (event) {
+        var prjId = event.dataTransfer.getData("text/plain");
+        projectsState.moveProject(prjId, this.type === 'active' ? ProjectStatus.Active : ProjectStatus.Finished);
+    };
+    ProjectList.prototype.dragleaveHandler = function (_) {
+        var listElement = this.element.querySelector("ul"); /// OJO
+        listElement.classList.remove("droppable");
+    };
     ProjectList.prototype.configure = function () {
         var _this = this;
+        this.element.addEventListener("dragover", this.dragOverHandler);
+        this.element.addEventListener("dragleave", this.dragleaveHandler);
+        this.element.addEventListener("drop", this.dropHandler);
         projectsState.addListeners(function (projects) {
             var relevantProjects = projects.filter(function (prj) {
                 if (_this.type === "active") {
@@ -183,7 +223,7 @@ var ProjectList = /** @class */ (function (_super) {
         listElement.innerHTML = "";
         for (var _i = 0, _a = this.assignedProjects; _i < _a.length; _i++) {
             var prjItem = _a[_i];
-            new ProjectItem(this.element.querySelector('ul').id, prjItem);
+            new ProjectItem(this.element.querySelector("ul").id, prjItem);
         }
     };
     return ProjectList;
