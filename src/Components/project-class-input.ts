@@ -1,6 +1,6 @@
-import { Component } from "./base-class.js";
-import { Validatable, validate } from "../util/validation.js";
-import { projectsState } from "../state/project-state-management.js"
+import { Component } from "./base-class";
+import { Validatable, validate } from "../util/validation";
+import { projectsState } from "../state/project-state-management"
 
 // Project Class
 export class ProjectInput extends Component<HTMLDivElement, HTMLFormElement> {

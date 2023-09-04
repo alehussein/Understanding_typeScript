@@ -1,6 +1,6 @@
-import { Draggable } from '../models/drag-drop-interfaces.js'
-import { Component } from './base-class.js';
-import { Project } from '../models/project-model.js'
+import { Draggable } from '../models/drag-drop-interfaces'
+import { Component } from './base-class';
+import { Project } from '../models/project-model'
 
 // Project Item Class
 

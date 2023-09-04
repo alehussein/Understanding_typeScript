@@ -1,9 +1,9 @@
-import { Component } from './base-class.js';
-import { DragTarget } from '../models/drag-drop-interfaces.js';
-import { Project } from '../models/project-model.js';
-import { projectsState } from '../state/project-state-management.js';
-import { ProjectStatus } from '../models/project-model.js';
-import { ProjectItem } from './project-item-class.js';
+import { Component } from './base-class';
+import { DragTarget } from '../models/drag-drop-interfaces';
+import { Project } from '../models/project-model';
+import { projectsState } from '../state/project-state-management';
+import { ProjectStatus } from '../models/project-model';
+import { ProjectItem } from './project-item-class';
 
 
 // Project List Class
